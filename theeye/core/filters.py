@@ -9,7 +9,7 @@ class EventFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains')
     start_date = django_filters.DateFilter(field_name='timestamp', lookup_expr='gt', )
     end_date = django_filters.DateFilter(field_name='timestamp', lookup_expr='lt', )
-    timestamp_range = django_filters.DateRangeFilter(field_name='timestamp')
+    timestamp = django_filters.DateFilter(field_name='timestamp', lookup_expr='icontains', )
 
     class Meta:
         model = Event
