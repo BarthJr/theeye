@@ -11,7 +11,15 @@ class EventSerializer(serializers.ModelSerializer):
 
     def validate_timestamp(self, value):
         if value > timezone.now():
-            raise serializers.ValidationError("timestamp is in the future")
+            raise serializers.ValidationError("timestamp field is in the future")
+
+        return value
+
+    def validate_data(self, value):
+        if not value:
+            raise serializers.ValidationError("data field is empty")
+        if not isinstance(value, dict):
+            raise serializers.ValidationError("data field is not a valid JSON")
 
         return value
 
