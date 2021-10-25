@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework.test import APITestCase
 
 
@@ -13,6 +15,14 @@ class EventTest(APITestCase):
         for event in self.events:
             response = self.client.post('/api/events/', event, format='json')
             self.assertEqual(response.status_code, 202)
+
+    def test_create_event_with_future_timestamp_should_create_event_error(self):
+        tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+        event = self.events[0]
+        event['timestamp'] = tomorrow
+
+        self.client.post('/api/events/', event, format='json')
+        self.assertTrue(EventError.objects.exists())
 
     def _getEvents(self):
         return [
