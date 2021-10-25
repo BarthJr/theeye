@@ -1,5 +1,6 @@
 import datetime
 
+from django.test.utils import override_settings
 from rest_framework.test import APITestCase
 
 from .models import EventError
@@ -13,11 +14,13 @@ class EventTest(APITestCase):
         response = self.client.get('/api/events/')
         self.assertEqual(response.status_code, 200)
 
+    @override_settings(CELERY_EAGER_PROPAGATES_EXCEPTIONS=True, CELERY_ALWAYS_EAGER=True, BROKER_BACKEND='memory')
     def test_create_event(self):
         for event in self.events:
             response = self.client.post('/api/events/', event, format='json')
             self.assertEqual(response.status_code, 202)
 
+    @override_settings(CELERY_EAGER_PROPAGATES_EXCEPTIONS=True, CELERY_ALWAYS_EAGER=True, BROKER_BACKEND='memory')
     def test_create_event_with_future_timestamp_should_create_event_error(self):
         tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         event = self.events[0]
