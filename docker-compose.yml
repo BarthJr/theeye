@@ -20,6 +20,21 @@ services:
     networks:
       - theeye
 
+  celery:
+    restart: always
+    build:
+      context: .
+    command: celery -A theeye worker -l INFO
+    volumes:
+      - ./theeye:/theeye
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - redis
+    networks:
+      - theeye
+
 
 networks:
   theeye:
