@@ -8,6 +8,8 @@ services:
       - "8000:8000"
     volumes:
       - ./theeye:/theeye
+    depends_on:
+      - db
     env_file:
       - ./.env
     command: >
@@ -17,6 +19,14 @@ services:
 
   redis:
     image: redis:alpine
+    networks:
+      - theeye
+
+  rabbitmq:
+    image: rabbitmq:alpine
+    restart: always
+    ports:
+      - "5672:5672"
     networks:
       - theeye
 
@@ -32,6 +42,7 @@ services:
     depends_on:
       - db
       - redis
+      - rabbitmq
       - web
     networks:
       - theeye

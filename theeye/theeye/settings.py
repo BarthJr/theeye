@@ -136,5 +136,5 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
-BROKER_URL = config('BROKER_URL')
+BROKER_URL = config('BROKER_URL', default='amqp://rabbitmq')
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
