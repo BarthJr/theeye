@@ -29,6 +29,22 @@ class EventTest(APITestCase):
         self.client.post('/api/events/', event, format='json')
         self.assertTrue(EventError.objects.exists())
 
+    @override_settings(CELERY_EAGER_PROPAGATES_EXCEPTIONS=True, CELERY_ALWAYS_EAGER=True, BROKER_BACKEND='memory')
+    def test_create_event_with_empty_data_should_create_event_error(self):
+        event = self.events[0]
+        event['data'] = {}
+
+        self.client.post('/api/events/', event, format='json')
+        self.assertEqual(EventError.objects.count(), 1)
+
+    @override_settings(CELERY_EAGER_PROPAGATES_EXCEPTIONS=True, CELERY_ALWAYS_EAGER=True, BROKER_BACKEND='memory')
+    def test_create_event_with_invalid_data_should_create_event_error(self):
+        event = self.events[0]
+        event['data'] = 'this is not a dict'
+
+        self.client.post('/api/events/', event, format='json')
+        self.assertEqual(EventError.objects.count(), 1)
+
     def _getEvents(self):
         return [
             {
