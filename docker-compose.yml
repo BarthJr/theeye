@@ -12,3 +12,15 @@ services:
       - ./.env
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - theeye
+
+  redis:
+    image: redis:alpine
+    networks:
+      - theeye
+
+
+networks:
+  theeye:
+    driver: bridge
