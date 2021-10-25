@@ -30,8 +30,21 @@ services:
     env_file:
       - .env
     depends_on:
-      - web
+      - db
       - redis
+      - web
+    networks:
+      - theeye
+
+  db:
+    image: postgres:14.0-alpine
+    restart: on-failure
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data/
     networks:
       - theeye
 
@@ -39,3 +52,6 @@ services:
 networks:
   theeye:
     driver: bridge
+
+volumes:
+  db:
