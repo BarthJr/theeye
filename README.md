@@ -79,6 +79,20 @@ All the fields are mandatory. The POST will be successful, but the event will go
 # API Examples
 You can copy the commands below to use The Eye by command line using the CURL package.
 ## Create Event
+This is an example of an event in JSON format:
+```console
+{
+  "session_id": "e2085be5-9137-4e4e-80b5-f1ffddc25423",
+  "category": "page interaction",
+  "name": "pageview",
+  "data": {
+    "host": "www.consumeraffairs.com",
+    "path": "/",
+  },
+  "timestamp": "2021-01-01 09:15:27.243860"
+}
+```
+This is an example of an event using CURL:
 ```console
 curl -X POST "http://localhost:8000/api/events/" -H  "Content-Type: application/json" -d "{  \"session_id\": \"e2085be5-9137-4e4e-80b5-f1ffddc25423\",  \"category\": \"page interaction\",  \"name\": \"pageview\",  \"data\": {    \"host\": \"www.consumeraffairs.com\",    \"path\": \"/\"  },  \"timestamp\": \"2021-10-24 09:15:27.243860\"}"
 ```
