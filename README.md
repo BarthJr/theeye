@@ -26,8 +26,6 @@ If you prefer Swagger, use this link: http://127.0.0.1:8000/swagger/
 GET|/events|Returns all events
 GET|/events/{id}|Returns event by id
 POST|/events|Creates event
-PUT|/events/{id}|Updates event
-DELETE|/events/{id}|Deletes event by id
 
 ### Filters
 Those filters apply only for the events list endpoint (GET)
@@ -49,9 +47,6 @@ _To filter the events for a specific date (2021-10-24), you should follow this p
 :--|:--|:--
 GET|/errors|Returns all errors
 GET|/errors/{id}|Returns error by id
-POST|/errors|Creates error
-PUT|/errors/{id}|Updates error
-DELETE|/errors/{id}|Deletes error by id
 
 ### Filters
 Those filters apply only for the errors list endpoint (GET)

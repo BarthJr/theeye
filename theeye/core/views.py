@@ -1,4 +1,4 @@
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, mixins
 from rest_framework.response import Response
 
 from .tasks import create_event
@@ -7,7 +7,7 @@ from .filters import EventFilter, EventErrorFilter
 from .serializers import EventSerializer, EventErrorSerializer
 
 
-class EventViewSet(viewsets.ModelViewSet):
+class EventViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     filter_class = EventFilter
@@ -17,7 +17,7 @@ class EventViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_202_ACCEPTED)
 
 
-class EventErrorViewSet(viewsets.ModelViewSet):
+class EventErrorViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = EventError.objects.all()
     serializer_class = EventErrorSerializer
     filter_class = EventErrorFilter
