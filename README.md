@@ -82,7 +82,7 @@ This is an example of an event in JSON format:
   "name": "pageview",
   "data": {
     "host": "www.consumeraffairs.com",
-    "path": "/",
+    "path": "/"
   },
   "timestamp": "2021-01-01 09:15:27.243860"
 }
