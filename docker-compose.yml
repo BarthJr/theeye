@@ -49,6 +49,7 @@ services:
       - theeye
 
   db:
+    hostname: theeye_db_1
     image: postgres:14.0-alpine
     restart: on-failure
     env_file:
