@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Event
+from .models import Event, EventError
 
 
 class EventFilter(django_filters.FilterSet):
@@ -14,3 +14,12 @@ class EventFilter(django_filters.FilterSet):
     class Meta:
         model = Event
         fields = ('session_id', 'category', 'name')
+
+
+class EventErrorFilter(django_filters.FilterSet):
+    start_date = django_filters.DateTimeFilter(field_name='created_at', lookup_expr='gte', )
+    end_date = django_filters.DateTimeFilter(field_name='created_at', lookup_expr='lte', )
+
+    class Meta:
+        model = EventError
+        fields = ()

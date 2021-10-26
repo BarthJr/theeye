@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from .tasks import create_event
 from .models import Event, EventError
-from .filters import EventFilter
+from .filters import EventFilter, EventErrorFilter
 from .serializers import EventSerializer, EventErrorSerializer
 
 
@@ -20,3 +20,4 @@ class EventViewSet(viewsets.ModelViewSet):
 class EventErrorViewSet(viewsets.ModelViewSet):
     queryset = EventError.objects.all()
     serializer_class = EventErrorSerializer
+    filter_class = EventErrorFilter
