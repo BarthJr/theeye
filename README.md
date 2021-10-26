@@ -6,6 +6,9 @@ git clone git@github.com:BarthJr/theeye.git
 cd theeye
 ```
 ```
+cp contrib/.env-sample .env
+```
+```
 docker-compose up
 ```
 # Documentation
@@ -77,7 +80,7 @@ All the fields are mandatory. The POST will be successful, but the event will go
 You can copy the commands below to use The Eye by command line using the CURL package.
 ## Create Event
 ```console
-curl -X POST "http://localhost:8000/api/events/" -H  "Content-Type: application/json" -d "{    \"session_id\": \"e2085be5-9137-4e4e-80b5-f1ffddc25428\",    \"category\": \"form interaction\",    \"name\": \"submit\",    \"data\": {        \"session_id\": \"e2085be5-9137-4e4e-80b5-f1ffddc25423\",        \"category\": \"page interaction\",        \"name\": \"pageview\",        \"data\": {            \"host\": \"www.consumeraffairs.com\",            \"path\": \"/\"        },        \"timestamp\": \"2021-01-01 09:15:27.243860\"    },    \"timestamp\": \"2021-10-24 09:15:27.243860\"}"
+curl -X POST "http://localhost:8000/api/events/" -H  "Content-Type: application/json" -d "{  \"session_id\": \"e2085be5-9137-4e4e-80b5-f1ffddc25423\",  \"category\": \"page interaction\",  \"name\": \"pageview\",  \"data\": {    \"host\": \"www.consumeraffairs.com\",    \"path\": \"/\"  },  \"timestamp\": \"2021-10-24 09:15:27.243860\"}"
 ```
 
 ## Get Events filtered by a specific time range
